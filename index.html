@@ -6,11 +6,11 @@
 
         ws.onmessage = function (evt) {
             var received_msg = evt.data;
-            alert("Message is received...");
+            alert("Rocket league is running...");
         };
   
         ws.onclose = function () {
             // websocket is closed.
-            alert("Connection is closed...");
+            alert("Connection closed - rocket league not running");
         };
 </script>
