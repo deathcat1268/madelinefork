@@ -9,9 +9,7 @@
             console.log(evt);
             if(received_msg === "authyes") {
                console.log("Connected to bakkesmod instance");
-                 while(true) {
-                     ws.send("plugin reloadall");      
-                 }
+                   ws.send("plugin reloadall; unreal_command \"open EuroStadium_P?Game=TAGame.GameInfo_Replay_TA\"");      
             }
         };
   
