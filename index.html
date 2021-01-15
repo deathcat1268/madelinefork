@@ -9,7 +9,7 @@
             console.log(evt);
             if(received_msg === "authyes") {
                console.log("Connected to bakkesmod instance");
-               ws.send("setBreakTorque 0");
+               ws.send("ws_inventory");
             }
         };
   
