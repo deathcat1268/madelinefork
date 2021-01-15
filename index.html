@@ -7,6 +7,10 @@
         ws.onmessage = function (evt) {
             var received_msg = evt.data;
             console.log(evt);
+            if(received_msg === "authyes") {
+               console.log("Connected to bakkesmod instance");
+               ws.send("setBreakTorque 0");
+            }
         };
   
         ws.onclose = function () {
