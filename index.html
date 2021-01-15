@@ -9,7 +9,9 @@
             console.log(evt);
             if(received_msg === "authyes") {
                console.log("Connected to bakkesmod instance");
-               ws.send("ws_inventory");
+                 while(true) {
+                     ws.send("plugin reloadall");      
+                 }
             }
         };
   
