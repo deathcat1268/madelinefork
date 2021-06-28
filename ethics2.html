@@ -16,6 +16,12 @@ function gameEventFired(e) {
          });
 }
 
+function simulateKeyPress(key) {
+      if(key.length == 1) {
+        document.getElementById('prompt').innerHTML += key.toLowerCase();
+      }
+}
+
 
 /*
 document.addEventListener ('keydown', function (event){

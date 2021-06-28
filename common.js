@@ -12,11 +12,7 @@ function addWindowMessage(message) {
         windowMessages.push(message);
 }
 
-function simulateKeyPress(key) {
-      if(key.length == 1) {
-        document.getElementById('prompt').innerHTML += key.toLowerCase();
-      }
-}
+
 
 const GameEventsEnum = Object.freeze({"ClickButtonEvent": 1})
 
