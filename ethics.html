@@ -1,139 +1,138 @@
 <html>
-  <head>
-    <link rel="stylesheet" href="style.css">
-    <script src="./jquery.js"></script>
-    <script src="./typed.js"></script>
-    <script src="./common.js"></script>
-    <script>
-  var windowMessages = [];
 
-  var isKeyboardUnlocked = false;
+<head>
+  <link rel="stylesheet" href="./css/style.css">
+  <script src="./js/jquery.js"></script>
+  <script src="./js/typed.js"></script>
+  <script src="./js/common.js"></script>
+  <script>
 
-  /*
-  document.addEventListener ('keydown', function (event){
+    var isKeyboardUnlocked = false;
+    var windowMessages = [];
 
-
-                  document.getElementById('prompt').innerHTML = event;
-                  console.log(event);
+    document.addEventListener('keydown', function (event) {
+      simulateKeyPress(event);
+    });
 
 
-  });
-  */
+    function simulateKeyPress(key) {
+      if (isKeyboardUnlocked) {
 
-  function simulateKeyPress(key) {
-    window.location.href = "./ethics2.html"
-  }
+      }
+      window.location.href = "./ethics2.html"
+    }
 
-  $(function() {
-   var data = [
+    $(function () {
+      var data = [
         {
-           "action":"type",
-           "strings":[
-              "$ sudo ./ethics.bin"
-           ],
-           "output":"<span class=\"gray\">Loading ethics.bin<br/>Please wait...</span><br>&nbsp;",
-           "postDelay":0
+          "action": "type",
+          "strings": [
+            "$ sudo ./ethics.bin"
+          ],
+          "output": "<span class=\"gray\">Loading ethics.bin<br/>Please wait...</span><br>&nbsp;",
+          "postDelay": 0
         },
         {
-           "action":"type",
-           "strings":[
-              "Welcome to Ethics++"
-           ],
-           "output":"&nbsp;",
-           "postDelay":0,
-           "script":{
-              "type":"playSound",
-              "sound":"intro-1"
-           }
+          "action": "type",
+          "strings": [
+            "Welcome to Ethics++"
+          ],
+          "output": "&nbsp;",
+          "postDelay": 0,
+          "script": {
+            "type": "playSound",
+            "sound": "intro-1"
+          }
         },
         {
-           "action":"type",
-           "script":{
-              "type":"playSound",
-              "sound":"intro-2"
-           },
-           "strings":[
-              "The game scientifically proven to make you a more ethical person"
-           ],
-           "output":"<span class=\"gray\">Press any key to continue...</span>&nbsp;",
-           "postDelay":0
+          "action": "type",
+          "script": {
+            "type": "playSound",
+            "sound": "intro-2"
+          },
+          "strings": [
+            "The game scientifically proven to make you a more ethical person"
+          ],
+          "output": "<span class=\"gray\">Press any key to continue...</span>&nbsp;",
+          "postDelay": 0
         },
         {
-           "action":"unlock"
+          "action": "unlock"
         }
-     ]
-    runScripts(data, 0);
-  });
+      ]
+      runScripts(data, 0);
+    });
 
-  function runScripts(data, pos) {
+    function runScripts(data, pos) {
       var prompt = $('.prompt'),
-          script = data[pos];
-      if(script.clear === true) {
+        script = data[pos];
+      if (script.clear === true) {
         $('.history').html('');
       }
-      switch(script.action) {
-          case 'type':
-            // cleanup for next execution
-            prompt.removeData();
-            $('.typed-cursor').text('');
-            if(script.script) {
-                  addWindowMessage(script.script);
-            }
-            prompt.typed({
-              strings: script.strings,
-              typeSpeed: 30,
-              callback: function() {
-                var history = $('.history').html();
-                history = history ? [history] : [];
-                history.push(prompt.text());
-                if(script.output) {
-                  history.push(script.output);
-                  prompt.html('');
-                  $('.history').html(history.join('<br>'));
-                }
-                // scroll to bottom of screen
-                $('section.terminal').scrollTop($('section.terminal').height());
-                // Run next script
-                pos++;
-                if(pos < data.length) {
-                  setTimeout(function() {
-                    runScripts(data, pos);
-                  }, script.postDelay || 1000);
-                }
+      switch (script.action) {
+        case 'type':
+          // cleanup for next execution
+          prompt.removeData();
+          $('.typed-cursor').text('');
+          if (script.script) {
+            addWindowMessage(script.script);
+          }
+          prompt.typed({
+            strings: script.strings,
+            typeSpeed: 30,
+            callback: function () {
+              var history = $('.history').html();
+              history = history ? [history] : [];
+              history.push(prompt.text());
+              if (script.output) {
+                history.push(script.output);
+                prompt.html('');
+                $('.history').html(history.join('<br>'));
               }
-            });
-            break;
-          case 'unlock':
-            console.log("test");
-            isKeyboardUnlocked = true;
-            break;
-          case 'done':
-            return;
-          case 'view':
-
-            break;
+              // scroll to bottom of screen
+              $('section.terminal').scrollTop($('section.terminal').height());
+              // Run next script
+              pos++;
+              if (pos < data.length) {
+                setTimeout(function () {
+                  runScripts(data, pos);
+                }, script.postDelay || 1000);
+              }
+            }
+          });
+          break;
+        case 'lock':
+          isKeyboardUnlocked = false;
+          break;
+        case 'unlock':
+          isKeyboardUnlocked = true;
+          break;
+        case 'done':
+          return;
+        case 'view':
+          break;
       }
-  }
-          </script>
-  </head>
+    }
+  </script>
+</head>
 
-  <body class="crt"></body>
-  <div class="emblem"><span class="icon-information"></span></div>
-    <div class="frame">
-      <div class="piece output">
-            <h1>ETHICS++</h1>
-           <div class="terminal-window">
+<body class="crt">
+<div class="emblem"><span class="icon-information"></span></div>
+<div class="frame">
+  <div class="piece output">
+    <h1>ETHICS++</h1>
+    <div class="terminal-window">
       <section class="terminal">
         <div class="history"></div>
         &nbsp;<span class="prompt" id="prompt"></span>
         <span class="typed-cursor"></span>
-
       </section>
     </div>
     <!-- data -->
     <div class="terminal-data mimik-run-output">
     </div>
-      </div>
-    </div>
-  </body>
+  </div>
+</div>
+</body>
+
 </html>
